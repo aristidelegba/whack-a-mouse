@@ -2,6 +2,11 @@
   "name": "whack-a-mouse",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Aristide Legba",
+    "email": "aristidelegba67@gmail.com",
+  },
+  "homepage": "https://github.com/aristidelegba/whack-a-mouse",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
