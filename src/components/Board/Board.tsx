@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Hole } from "./Hole";
 import { useGlobalContext } from "@/contexts";
-import { getRandomNumbers } from "@/helpers/utils";
+import { getRandomNumber, getRandomNumbers } from "@/helpers/utils";
 
 
 const initialHoles = new Array(9)
@@ -30,24 +30,13 @@ export function Board({ }) {
       selectedLevel.mouseCount
     ).map((index) => {
       let mousesCount = 0;
-      if (totalMousesAllowed > 1) {
-        mousesCount = getRandomNumbers(1, totalMousesAllowed, 1)[0];
-        totalMousesAllowed -= mousesCount;
-        totalMousesPutsInHoles += mousesCount;
-      } else {
-        mousesCount = totalMousesPutsInHoles >= totalMousesAllowed ? 0:1;
-      }
- 
-      // if(mousesCount > totalMousesAllowed){
-      //   mousesCount =0
-      // }
-
+      mousesCount = totalMousesAllowed > 0 ? getRandomNumber(1, totalMousesAllowed) : 0;
+      totalMousesAllowed -= mousesCount;
       return { index, mousesCount };
     });
-console.log('selectedHolesIndex :>> ', selectedHolesIndex);
     const t1 = setTimeout(() => {
       setHoles((olds) => {
-        return olds.map((e, i) => {
+        return initialHoles.map((e, i) => {
           const isASelectedHole = selectedHolesIndex.find(item => item.index === i)
           if (isASelectedHole) {
             return <Hole mousesCount={isASelectedHole.mousesCount} showMouses={true} key={i}></Hole>;
