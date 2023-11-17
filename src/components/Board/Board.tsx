@@ -35,15 +35,13 @@ export function Board({ }) {
       return { index, mousesCount };
     });
     const t1 = setTimeout(() => {
-      setHoles((olds) => {
-        return initialHoles.map((e, i) => {
-          const isASelectedHole = selectedHolesIndex.find(item => item.index === i)
-          if (isASelectedHole) {
-            return <Hole mousesCount={isASelectedHole.mousesCount} showMouses={true} key={i}></Hole>;
-          }
-          return <Hole mousesCount={0} showMouses={false} key={i}></Hole>;
-        });
-      });
+      const newsHoles = [...initialHoles]
+      selectedHolesIndex.map(h => {
+        // news[h.index] = React.cloneElement(news[h.index], { mousesCount: h.mousesCount, showMouses: h.mousesCount > 0 })
+        newsHoles[h.index] = <Hole mousesCount={h.mousesCount} showMouses={true} key={h.index}></Hole>
+      })
+
+      setHoles(newsHoles)
       const t2 = setTimeout(() => {
         setHoles((olds) => {
           return initialHoles;
