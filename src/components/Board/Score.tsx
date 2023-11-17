@@ -2,10 +2,10 @@
 import { useGlobalContext } from '@/contexts'
 import React, { useEffect } from 'react'
 
-const Score = () => {  
+const Score = () => {
     const { score, resetGame, setShowGoodByeScreen } = useGlobalContext()
     useEffect(() => {
-        if (score >=0) {
+        if (score >=15) {
             if (confirm("Voulez vous continuer?")) {
                 resetGame({})
             }else{
