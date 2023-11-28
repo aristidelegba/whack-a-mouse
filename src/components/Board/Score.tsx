@@ -5,9 +5,9 @@ import React, { useEffect } from 'react'
 const Score = () => {
     const { score, resetGame, setShowGoodByeScreen } = useGlobalContext()
     useEffect(() => {
-        if (score >=15) {
+        if (score >=2) {
             if (confirm("Voulez vous continuer?")) {
-                resetGame({})
+                resetGame()
             }else{
                 setShowGoodByeScreen(true)
             }

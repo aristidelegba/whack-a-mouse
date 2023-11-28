@@ -14,7 +14,7 @@ type GlobalContextType = {
   setScore: React.Dispatch<number>;
   setVisibilityDuration: React.Dispatch<number>;
   setSelectedLevel: React.Dispatch<TLevel["id"]>;
-  resetGame: React.Dispatch<Object>;
+  resetGame: ()=>void;
   setShowGoodByeScreen: React.Dispatch<boolean>;
 }
 
@@ -27,19 +27,28 @@ type Action =
   | { type: "SET_SELECTED_LEVEL"; payload: TLevel };
 
 // Create the context with an initial value
-export const initialContextValue: GlobalContextType = {
+
+const inititalContextValueMethods={
+  setScore: () => { },
+  setSelectedLevel: () => { },
+  setVisibilityDuration: () => { },
+  resetGame: () => { },
+  setShowGoodByeScreen: () => { }
+}
+const inititalContextValueAttributes={
   score: 0,
   levels: levels,
   hidingDuration: 2000,
   visibilityDuration: 1,
   selectedLevel: levels[0],
   showGoodByeScreen: false,
-  setScore: () => { },
-  setSelectedLevel: () => { },
-  setVisibilityDuration: () => { },
-  resetGame: () => { },
-  setShowGoodByeScreen: () => { }
+}
+export const initialContextValue: GlobalContextType = {
+  ...inititalContextValueAttributes,
+ ...inititalContextValueMethods,
 };
+
+
 
 const GlobalContext = createContext<GlobalContextType | undefined>(
   undefined
@@ -71,7 +80,7 @@ const globalReducer = (
     case "SET_GOODBYE_SCREEN":
       return { ...state, showGoodByeScreen: action.payload };
     case "RESET_GAME":
-      return { ...initialContextValue };
+      return { ...state, ...inititalContextValueAttributes };
     default:
       return state;
   }
