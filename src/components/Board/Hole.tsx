@@ -18,17 +18,44 @@ export function Hole({ mousesCount = 0, showMouses = false }: THoleProps) {
   }
   const { setScore } = useGlobalContext();
   function mousesRenderer() {
-    return (
-      <>
-        {mousesCount === 1 ? (
-          <Mouse show={showMouses} />
-        ) : (
-          new Array(mousesCount)
-            .fill({})
-            .map((m, index) => <Mouse show={showMouses} key={index}></Mouse>)
-        )}
-      </>
-    );
+    switch (mousesCount) {
+      case 1:
+        return <Mouse show={showMouses} />;
+
+        break;
+      case 2:
+        return (
+          <>
+            <Mouse show={showMouses} />
+            <Mouse show={showMouses} />
+          </>
+        );
+
+        break;
+      case 3:
+        return (
+          <>
+            <Mouse show={showMouses} />
+            <Mouse show={showMouses} />
+            <Mouse show={showMouses} />
+          </>
+        );
+
+        break;
+
+      default:
+        break;
+    }
+    // <>
+    //   {mousesCount === 1 ? (
+    //     <Mouse show={showMouses} />
+    //   ) : (
+    //     new Array(mousesCount)
+    //       .fill({})
+    //       .map((m, index) => <Mouse show={showMouses} key={index}></Mouse>)
+    //   )}
+    // </>
+    // );
   }
 
   return (
